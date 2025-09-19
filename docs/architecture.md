@@ -1,6 +1,6 @@
 # Architecture Overview
 
-This document describes the high-level architecture of CDA (Autonomous Intelligent Cyber Defense Agent).
+This document describes the high-level architecture of CDA (Cyber Defense Agent).
 
 ## System Overview
 

@@ -2,7 +2,7 @@
 
 <div align="center">
   <h1>🚀 CDA Installation & Setup Guide</h1>
-  <p><strong>Autonomous Intelligent Cyber Defense Agent</strong></p>
+  <p><strong>Cyber Defense Agent</strong></p>
   <img src="https://img.shields.io/badge/CDA-v1.0.0-blue" alt="CDA v1.0.0"/>
   <img src="https://img.shields.io/badge/platform-Linux-lightgrey" alt="Linux"/>
 </div>

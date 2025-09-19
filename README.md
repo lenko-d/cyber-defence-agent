@@ -1,4 +1,4 @@
-# Autonomous Intelligent Cyber Defense Agent (CDA)
+# Cyber Defense Agent (CDA)
 
 <div align="center">
   <img src="https://img.shields.io/badge/build-passing-brightgreen" alt="Build Status"/>
