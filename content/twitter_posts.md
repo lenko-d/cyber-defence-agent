@@ -7,7 +7,7 @@ Autonomous AI-powered cybersecurity with 99.7% detection accuracy & 0.08% false 
 
 Built with C++17 & Python • Featured in Black Hat Arsenal 2024
 
-🔗 github.com/your-repo/aica-agent
+🔗 github.com/your-repo/cda-agent
 
 #Cybersecurity #AI #ThreatDetection #OpenSource #BlackHat
 
@@ -72,7 +72,7 @@ Contribute to CDA:
 
 The future of cybersecurity is autonomous. Let's build it together!
 
-🔗 docs.aica-agent.com
+🔗 docs.cda-agent.com
 #OpenSource #Cybersecurity #AI
 
 ---

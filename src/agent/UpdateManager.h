@@ -105,7 +105,7 @@ private:
     std::unordered_map<std::string, std::string> config_;
 
     // Constants
-    static constexpr const char* DEFAULT_UPDATE_SERVER = "https://updates.aica-agent.com";
+    static constexpr const char* DEFAULT_UPDATE_SERVER = "https://updates.cda-agent.com";
     static constexpr const char* VERSION_FILE = "version.txt";
     static constexpr const char* BACKUP_DIR = "backups";
     static constexpr const char* TEMP_DIR = "temp";

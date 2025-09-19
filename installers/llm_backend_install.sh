@@ -13,9 +13,9 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-INSTALL_DIR="/opt/aica-llm-backend"
-CONFIG_DIR="/etc/aica-llm-backend"
-LOG_DIR="/var/log/aica-llm-backend"
+INSTALL_DIR="/opt/cda-llm-backend"
+CONFIG_DIR="/etc/cda-llm-backend"
+LOG_DIR="/var/log/cda-llm-backend"
 SERVICE_NAME="aica-llm-backend"
 PYTHON_VERSION="python3"
 
@@ -219,7 +219,7 @@ create_scripts() {
 # CDA LLM Backend Start Script
 
 echo "Starting CDA LLM Backend..."
-cd /opt/aica-llm-backend
+cd /opt/cda-llm-backend
 source venv/bin/activate
 python llm_backend.py &
 echo $! > llm_backend.pid
@@ -231,11 +231,11 @@ EOF
 #!/bin/bash
 # CDA LLM Backend Stop Script
 
-if [[ -f "/opt/aica-llm-backend/llm_backend.pid" ]]; then
-    PID=$(cat /opt/aica-llm-backend/llm_backend.pid)
+if [[ -f "/opt/cda-llm-backend/llm_backend.pid" ]]; then
+    PID=$(cat /opt/cda-llm-backend/llm_backend.pid)
     echo "Stopping CDA LLM Backend (PID: $PID)..."
     kill $PID
-    rm -f /opt/aica-llm-backend/llm_backend.pid
+    rm -f /opt/cda-llm-backend/llm_backend.pid
     echo "CDA LLM Backend stopped"
 else
     echo "CDA LLM Backend does not appear to be running"
@@ -247,15 +247,15 @@ EOF
 #!/bin/bash
 # CDA LLM Backend Status Script
 
-if [[ -f "/opt/aica-llm-backend/llm_backend.pid" ]]; then
-    PID=$(cat /opt/aica-llm-backend/llm_backend.pid)
+if [[ -f "/opt/cda-llm-backend/llm_backend.pid" ]]; then
+    PID=$(cat /opt/cda-llm-backend/llm_backend.pid)
     if ps -p $PID > /dev/null; then
         echo "CDA LLM Backend is running (PID: $PID)"
         echo "Memory usage:"
         ps -p $PID -o pid,ppid,cmd,%mem,%cpu --no-headers
     else
         echo "CDA LLM Backend is not running (stale PID file)"
-        rm -f /opt/aica-llm-backend/llm_backend.pid
+        rm -f /opt/cda-llm-backend/llm_backend.pid
     fi
 else
     echo "CDA LLM Backend is not running"
@@ -264,7 +264,7 @@ fi
 # Show recent log entries
 echo ""
 echo "Recent log entries:"
-tail -n 10 /var/log/aica-llm-backend/llm_backend.log 2>/dev/null || echo "No log file found"
+tail -n 10 /var/log/cda-llm-backend/llm_backend.log 2>/dev/null || echo "No log file found"
 EOF
 
     # Make scripts executable
@@ -328,9 +328,9 @@ sudo rm -f /etc/systemd/system/aica-llm-backend.service
 sudo systemctl daemon-reload
 
 print_status "Removing files and directories..."
-sudo rm -rf /opt/aica-llm-backend
-sudo rm -rf /etc/aica-llm-backend
-sudo rm -rf /var/log/aica-llm-backend
+sudo rm -rf /opt/cda-llm-backend
+sudo rm -rf /etc/cda-llm-backend
+sudo rm -rf /var/log/cda-llm-backend
 
 print_status "Checking for remaining processes..."
 if pgrep -f "llm_backend.py" > /dev/null; then
@@ -345,9 +345,9 @@ print_success "CDA LLM Backend has been completely removed!"
 echo ""
 echo "Removed components:"
 echo "- Service files"
-echo "- Installation directory (/opt/aica-llm-backend)"
-echo "- Configuration directory (/etc/aica-llm-backend)"
-echo "- Log directory (/var/log/aica-llm-backend)"
+echo "- Installation directory (/opt/cda-llm-backend)"
+echo "- Configuration directory (/etc/cda-llm-backend)"
+echo "- Log directory (/var/log/cda-llm-backend)"
 echo "- Any running processes"
 echo "- Crontab entries"
 EOF

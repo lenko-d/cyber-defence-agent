@@ -13,11 +13,11 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-INSTALL_DIR="/opt/aica"
-CONFIG_DIR="/etc/aica"
-LOG_DIR="/var/log/aica"
-DATA_DIR="/var/lib/aica"
-SERVICE_NAME="aica-agent"
+INSTALL_DIR="/opt/cda"
+CONFIG_DIR="/etc/cda"
+LOG_DIR="/var/log/cda"
+DATA_DIR="/var/lib/cda"
+SERVICE_NAME="cda-agent"
 BUILD_DIR="build"
 
 # Function to print colored output
@@ -140,7 +140,7 @@ create_config() {
     print_status "Creating configuration files..."
 
     # Create default configuration
-    cat > "$CONFIG_DIR/aica.conf" << EOF
+    cat > "$CONFIG_DIR/cda.conf" << EOF
 # CDA Configuration File
 # This file contains configuration settings for the CDA agent
 
@@ -164,7 +164,7 @@ enable_packet_inspection = true
 [logging]
 # Logging configuration
 log_level = INFO
-log_file = $LOG_DIR/aica.log
+log_file = $LOG_DIR/cda.log
 max_log_size = 100MB
 max_log_files = 5
 
@@ -198,13 +198,13 @@ Wants=network.target
 Type=simple
 User=$USER
 Group=$USER
-ExecStart=$INSTALL_DIR/bin/aica_agent
+ExecStart=$INSTALL_DIR/bin/cda_agent
 ExecReload=/bin/kill -HUP \$MAINPID
 Restart=always
 RestartSec=5
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=aica-agent
+SyslogIdentifier=cda-agent
 
 # Security settings
 NoNewPrivileges=yes
@@ -238,8 +238,8 @@ create_scripts() {
 # CDA Start Script
 
 echo "Starting CDA Agent..."
-cd /opt/aica
-./bin/aica_agent &
+cd /opt/cda
+./bin/cda_agent &
 echo $! > aica.pid
 echo "CDA Agent started with PID $(cat aica.pid)"
 EOF
@@ -249,11 +249,11 @@ EOF
 #!/bin/bash
 # CDA Stop Script
 
-if [[ -f "/opt/aica/aica.pid" ]]; then
-    PID=$(cat /opt/aica/aica.pid)
+if [[ -f "/opt/cda/aica.pid" ]]; then
+    PID=$(cat /opt/cda/aica.pid)
     echo "Stopping CDA Agent (PID: $PID)..."
     kill $PID
-    rm -f /opt/aica/aica.pid
+    rm -f /opt/cda/aica.pid
     echo "CDA Agent stopped"
 else
     echo "CDA Agent does not appear to be running"
@@ -265,15 +265,15 @@ EOF
 #!/bin/bash
 # CDA Status Script
 
-if [[ -f "/opt/aica/aica.pid" ]]; then
-    PID=$(cat /opt/aica/aica.pid)
+if [[ -f "/opt/cda/aica.pid" ]]; then
+    PID=$(cat /opt/cda/aica.pid)
     if ps -p $PID > /dev/null; then
         echo "CDA Agent is running (PID: $PID)"
         echo "Memory usage:"
         ps -p $PID -o pid,ppid,cmd,%mem,%cpu --no-headers
     else
         echo "CDA Agent is not running (stale PID file)"
-        rm -f /opt/aica/aica.pid
+        rm -f /opt/cda/aica.pid
     fi
 else
     echo "CDA Agent is not running"
@@ -282,7 +282,7 @@ fi
 # Show recent log entries
 echo ""
 echo "Recent log entries:"
-tail -n 10 /var/log/aica/aica.log 2>/dev/null || echo "No log file found"
+tail -n 10 /var/log/cda/cda.log 2>/dev/null || echo "No log file found"
 EOF
 
     # Make scripts executable
@@ -298,7 +298,7 @@ setup_logrotate() {
     print_status "Setting up log rotation..."
 
     sudo tee "/etc/logrotate.d/aica" > /dev/null << EOF
-/var/log/aica/*.log {
+/var/log/cda/*.log {
     daily
     missingok
     rotate 7
@@ -307,7 +307,7 @@ setup_logrotate() {
     notifempty
     create 644 $USER $USER
     postrotate
-        systemctl reload aica-agent
+        systemctl reload cda-agent
     endscript
 }
 EOF
@@ -324,18 +324,18 @@ create_uninstaller() {
 # CDA Uninstaller
 
 echo "Stopping CDA service..."
-sudo systemctl stop aica-agent 2>/dev/null || true
-sudo systemctl disable aica-agent 2>/dev/null || true
+sudo systemctl stop cda-agent 2>/dev/null || true
+sudo systemctl disable cda-agent 2>/dev/null || true
 
 echo "Removing systemd service..."
-sudo rm -f /etc/systemd/system/aica-agent.service
+sudo rm -f /etc/systemd/system/cda-agent.service
 sudo systemctl daemon-reload
 
 echo "Removing files..."
-sudo rm -rf /opt/aica
-sudo rm -rf /etc/aica
-sudo rm -rf /var/log/aica
-sudo rm -rf /var/lib/aica
+sudo rm -rf /opt/cda
+sudo rm -rf /etc/cda
+sudo rm -rf /var/log/cda
+sudo rm -rf /var/lib/cda
 sudo rm -f /etc/logrotate.d/aica
 
 echo "CDA has been uninstalled successfully"
@@ -359,10 +359,10 @@ post_install_info() {
     echo ""
     echo "Service Management:"
     echo "=================="
-    echo "Start service:   sudo systemctl start aica-agent"
-    echo "Stop service:    sudo systemctl stop aica-agent"
-    echo "Enable service:  sudo systemctl enable aica-agent"
-    echo "Check status:    sudo systemctl status aica-agent"
+    echo "Start service:   sudo systemctl start cda-agent"
+    echo "Stop service:    sudo systemctl stop cda-agent"
+    echo "Enable service:  sudo systemctl enable cda-agent"
+    echo "Check status:    sudo systemctl status cda-agent"
     echo ""
     echo "Manual Control:"
     echo "=============="
@@ -372,7 +372,7 @@ post_install_info() {
     echo ""
     echo "Configuration:"
     echo "=============="
-    echo "Config file:     $CONFIG_DIR/aica.conf"
+    echo "Config file:     $CONFIG_DIR/cda.conf"
     echo "Log files:       $LOG_DIR/"
     echo ""
     echo "Uninstallation:"
@@ -380,7 +380,7 @@ post_install_info() {
     echo "Run:             sudo $INSTALL_DIR/uninstall.sh"
     echo ""
     print_warning "Important: Configure packet capture permissions for the agent user"
-    print_warning "Run: sudo setcap cap_net_raw,cap_net_admin=eip $INSTALL_DIR/bin/aica_agent"
+    print_warning "Run: sudo setcap cap_net_raw,cap_net_admin=eip $INSTALL_DIR/bin/cda_agent"
 }
 
 # Main installation function

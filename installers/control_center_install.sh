@@ -13,9 +13,9 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-INSTALL_DIR="/opt/aica-control-center"
-CONFIG_DIR="/etc/aica-control-center"
-LOG_DIR="/var/log/aica-control-center"
+INSTALL_DIR="/opt/cda-control-center"
+CONFIG_DIR="/etc/cda-control-center"
+LOG_DIR="/var/log/cda-control-center"
 SERVICE_NAME="aica-control-center"
 PYTHON_VERSION="python3"
 
@@ -391,7 +391,7 @@ create_scripts() {
 # CDA Control Center Start Script
 
 echo "Starting CDA Control Center..."
-cd /opt/aica-control-center
+cd /opt/cda-control-center
 source venv/bin/activate
 python control_server.py &
 echo $! > control_center.pid
@@ -403,11 +403,11 @@ EOF
 #!/bin/bash
 # CDA Control Center Stop Script
 
-if [[ -f "/opt/aica-control-center/control_center.pid" ]]; then
-    PID=$(cat /opt/aica-control-center/control_center.pid)
+if [[ -f "/opt/cda-control-center/control_center.pid" ]]; then
+    PID=$(cat /opt/cda-control-center/control_center.pid)
     echo "Stopping CDA Control Center (PID: $PID)..."
     kill $PID
-    rm -f /opt/aica-control-center/control_center.pid
+    rm -f /opt/cda-control-center/control_center.pid
     echo "CDA Control Center stopped"
 else
     echo "CDA Control Center does not appear to be running"
@@ -419,15 +419,15 @@ EOF
 #!/bin/bash
 # CDA Control Center Status Script
 
-if [[ -f "/opt/aica-control-center/control_center.pid" ]]; then
-    PID=$(cat /opt/aica-control-center/control_center.pid)
+if [[ -f "/opt/cda-control-center/control_center.pid" ]]; then
+    PID=$(cat /opt/cda-control-center/control_center.pid)
     if ps -p $PID > /dev/null; then
         echo "CDA Control Center is running (PID: $PID)"
         echo "Memory usage:"
         ps -p $PID -o pid,ppid,cmd,%mem,%cpu --no-headers
     else
         echo "CDA Control Center is not running (stale PID file)"
-        rm -f /opt/aica-control-center/control_center.pid
+        rm -f /opt/cda-control-center/control_center.pid
     fi
 else
     echo "CDA Control Center is not running"
@@ -436,7 +436,7 @@ fi
 # Show recent log entries
 echo ""
 echo "Recent log entries:"
-tail -n 10 /var/log/aica-control-center/control_center.log 2>/dev/null || echo "No log file found"
+tail -n 10 /var/log/cda-control-center/control_center.log 2>/dev/null || echo "No log file found"
 EOF
 
     # Make scripts executable
@@ -500,9 +500,9 @@ sudo rm -f /etc/systemd/system/aica-control-center.service
 sudo systemctl daemon-reload
 
 print_status "Removing files and directories..."
-sudo rm -rf /opt/aica-control-center
-sudo rm -rf /etc/aica-control-center
-sudo rm -rf /var/log/aica-control-center
+sudo rm -rf /opt/cda-control-center
+sudo rm -rf /etc/cda-control-center
+sudo rm -rf /var/log/cda-control-center
 
 print_status "Checking for remaining processes..."
 if pgrep -f "control_server.py" > /dev/null; then
@@ -517,9 +517,9 @@ print_success "CDA Control Center has been completely removed!"
 echo ""
 echo "Removed components:"
 echo "- Service files"
-echo "- Installation directory (/opt/aica-control-center)"
-echo "- Configuration directory (/etc/aica-control-center)"
-echo "- Log directory (/var/log/aica-control-center)"
+echo "- Installation directory (/opt/cda-control-center)"
+echo "- Configuration directory (/etc/cda-control-center)"
+echo "- Log directory (/var/log/cda-control-center)"
 echo "- Any running processes"
 echo "- Crontab entries"
 EOF

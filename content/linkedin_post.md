@@ -113,9 +113,9 @@ CDA addresses the critical need for autonomous cybersecurity in an era of:
 
 ## 📞 Get Involved
 
-**GitHub**: https://github.com/your-repo/aica-agent
-**Documentation**: https://docs.aica-agent.com
-**Discussions**: https://github.com/your-repo/aica-agent/discussions
+**GitHub**: https://github.com/your-repo/cda-agent
+**Documentation**: https://docs.cda-agent.com
+**Discussions**: https://github.com/your-repo/cda-agent/discussions
 
 ## 🙏 Acknowledgments
 

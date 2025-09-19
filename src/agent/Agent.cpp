@@ -537,7 +537,7 @@ std::string Agent::handleLogsRequest() {
     response << "\r\n";
 
     try {
-        std::ifstream logFile("aica_agent.log");
+        std::ifstream logFile("cda_agent.log");
         if (logFile.is_open()) {
             std::string line;
             std::vector<std::pair<std::string, std::string>> logs;
@@ -647,7 +647,7 @@ bool Agent::analyzeWithLLM(const std::vector<std::string>& observations) {
 }
 
 void Agent::logEvent(const std::string& event) {
-    std::ofstream logFile("aica_agent.log", std::ios::app);
+    std::ofstream logFile("cda_agent.log", std::ios::app);
     if (logFile.is_open()) {
         auto now = std::chrono::system_clock::now();
         auto time = std::chrono::system_clock::to_time_t(now);

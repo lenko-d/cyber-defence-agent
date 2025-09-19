@@ -63,7 +63,7 @@ sudo dnf install cmake gcc-c++ pkgconfig libpcap-devel openssl-devel libcurl-dev
    The installer will:
    - Check system requirements
    - Build the project
-   - Install files to `/opt/aica`
+   - Install files to `/opt/cda`
    - Create systemd service
    - Set up configuration files
    - Configure log rotation
@@ -103,15 +103,15 @@ sudo dnf install cmake gcc-c++ pkgconfig libpcap-devel openssl-devel libcurl-dev
 The agent needs special permissions for packet capture:
 
 ```bash
-sudo setcap cap_net_raw,cap_net_admin=eip /opt/aica/bin/aica_agent
+sudo setcap cap_net_raw,cap_net_admin=eip /opt/cda/bin/cda_agent
 ```
 
 ### 2. Start the Services
 
 #### Main Agent:
 ```bash
-sudo systemctl start aica-agent
-sudo systemctl enable aica-agent
+sudo systemctl start cda-agent
+sudo systemctl enable cda-agent
 ```
 
 #### Control Center (if installed):
@@ -123,11 +123,11 @@ sudo systemctl enable aica-control-center
 #### Manual start:
 ```bash
 # Main agent
-cd /opt/aica
+cd /opt/cda
 ./start.sh
 
 # Control center
-cd /opt/aica-control-center
+cd /opt/cda-control-center
 ./start.sh
 ```
 
@@ -135,14 +135,14 @@ cd /opt/aica-control-center
 
 Check service status:
 ```bash
-sudo systemctl status aica-agent
+sudo systemctl status cda-agent
 sudo systemctl status aica-control-center  # If installed
 ```
 
 Or check manually:
 ```bash
-/opt/aica/status.sh
-/opt/aica-control-center/status.sh  # If installed
+/opt/cda/status.sh
+/opt/cda-control-center/status.sh  # If installed
 ```
 
 ### 4. Access the Control Center
@@ -156,7 +156,7 @@ http://localhost:5000
 
 ### Main Configuration File
 
-The main configuration file is located at `/etc/aica/aica.conf`. Key settings include:
+The main configuration file is located at `/etc/cda/cda.conf`. Key settings include:
 
 ```ini
 [agent]
@@ -175,7 +175,7 @@ enable_packet_inspection = true
 
 [logging]
 log_level = INFO
-log_file = /var/log/aica/aica.log
+log_file = /var/log/cda/cda.log
 
 [updates]
 auto_update = true
@@ -184,8 +184,8 @@ update_check_interval = 3600
 
 ### Log Files
 
-- Main log: `/var/log/aica/aica.log`
-- Agent logs: `/var/log/aica/aica_agent.log`
+- Main log: `/var/log/cda/cda.log`
+- Agent logs: `/var/log/cda/cda_agent.log`
 
 ## Service Management
 
@@ -193,35 +193,35 @@ update_check_interval = 3600
 
 ```bash
 # Start service
-sudo systemctl start aica-agent
+sudo systemctl start cda-agent
 
 # Stop service
-sudo systemctl stop aica-agent
+sudo systemctl stop cda-agent
 
 # Restart service
-sudo systemctl restart aica-agent
+sudo systemctl restart cda-agent
 
 # Check status
-sudo systemctl status aica-agent
+sudo systemctl status cda-agent
 
 # Enable auto-start on boot
-sudo systemctl enable aica-agent
+sudo systemctl enable cda-agent
 
 # Disable auto-start
-sudo systemctl disable aica-agent
+sudo systemctl disable cda-agent
 ```
 
 ### Manual Control
 
 ```bash
 # Start manually
-/opt/aica/start.sh
+/opt/cda/start.sh
 
 # Stop manually
-/opt/aica/stop.sh
+/opt/cda/stop.sh
 
 # Check status
-/opt/aica/status.sh
+/opt/cda/status.sh
 ```
 
 ## Directory Structure
@@ -229,9 +229,9 @@ sudo systemctl disable aica-agent
 After installation, CDA creates the following directory structure:
 
 ```
-/opt/aica/           # Main agent installation directory
+/opt/cda/           # Main agent installation directory
 ├── bin/
-│   └── aica_agent   # Main executable
+│   └── cda_agent   # Main executable
 ├── include/         # Header files
 ├── lib/            # Libraries
 ├── README.md       # Documentation
@@ -240,7 +240,7 @@ After installation, CDA creates the following directory structure:
 ├── status.sh       # Status check script
 └── uninstall.sh    # Uninstaller
 
-/opt/aica-control-center/  # Control center installation directory
+/opt/cda-control-center/  # Control center installation directory
 ├── venv/          # Python virtual environment
 ├── control_server.py     # Main control center script
 ├── templates/    # HTML templates
@@ -249,19 +249,19 @@ After installation, CDA creates the following directory structure:
 ├── status.sh     # Status check script
 └── uninstall.sh  # Uninstaller
 
-/etc/aica/           # Main agent configuration directory
-└── aica.conf       # Main configuration file
+/etc/cda/           # Main agent configuration directory
+└── cda.conf       # Main configuration file
 
-/etc/aica-control-center/  # Control center configuration directory
+/etc/cda-control-center/  # Control center configuration directory
 └── control_center.conf   # Control center configuration file
 
-/var/log/aica/       # Main agent log directory
-└── aica.log        # Main log file
+/var/log/cda/       # Main agent log directory
+└── cda.log        # Main log file
 
-/var/log/aica-control-center/  # Control center log directory
+/var/log/cda-control-center/  # Control center log directory
 └── control_center.log         # Control center log file
 
-/var/lib/aica/       # Main agent data directory
+/var/lib/cda/       # Main agent data directory
 ```
 
 ## Troubleshooting
@@ -270,12 +270,12 @@ After installation, CDA creates the following directory structure:
 
 1. **Permission denied for packet capture**
    ```bash
-   sudo setcap cap_net_raw,cap_net_admin=eip /opt/aica/bin/aica_agent
+   sudo setcap cap_net_raw,cap_net_admin=eip /opt/cda/bin/cda_agent
    ```
 
 2. **Service fails to start**
-   - Check system logs: `journalctl -u aica-agent`
-   - Verify configuration: `cat /etc/aica/aica.conf`
+   - Check system logs: `journalctl -u cda-agent`
+   - Verify configuration: `cat /etc/cda/cda.conf`
 
 3. **Build failures**
    - Ensure all dependencies are installed
@@ -285,12 +285,12 @@ After installation, CDA creates the following directory structure:
 
 View recent logs:
 ```bash
-tail -f /var/log/aica/aica.log
+tail -f /var/log/cda/cda.log
 ```
 
 View systemd logs:
 ```bash
-journalctl -u aica-agent -f
+journalctl -u cda-agent -f
 ```
 
 ## Uninstallation
@@ -298,7 +298,7 @@ journalctl -u aica-agent -f
 To completely remove CDA:
 
 ```bash
-sudo /opt/aica/uninstall.sh
+sudo /opt/cda/uninstall.sh
 ```
 
 This will:
@@ -317,8 +317,8 @@ This will:
 ## Support
 
 For issues or questions:
-- Check the logs in `/var/log/aica/`
-- Review the configuration in `/etc/aica/aica.conf`
+- Check the logs in `/var/log/cda/`
+- Review the configuration in `/etc/cda/cda.conf`
 - Consult the README.md for detailed documentation
 
 ## License

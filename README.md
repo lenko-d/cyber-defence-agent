@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/C%2B%2B-17-orange" alt="C++17"/>
   <img src="https://img.shields.io/badge/Python-3.8+-blue" alt="Python 3.8+"/>
   <img src="https://img.shields.io/badge/platform-Linux-lightgrey" alt="Linux"/>
-  <img src="https://img.shields.io/github/stars/your-repo/aica-agent" alt="GitHub Stars"/>
+  <img src="https://img.shields.io/github/stars/your-repo/cda-agent" alt="GitHub Stars"/>
 </div>
 
 ---
@@ -79,8 +79,8 @@ To create cybersecurity that protects systems 24/7 without human intervention, a
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-repo/aica-agent.git
-cd aica-agent
+git clone https://github.com/your-repo/cda-agent.git
+cd cda-agent
 
 # Build the project
 mkdir build && cd build
@@ -95,10 +95,10 @@ sudo apt install libpcap-dev libcurl4-openssl-dev libarchive-dev
 
 ```bash
 # Start the agent
-sudo ./aica_agent
+sudo ./cda_agent
 
 # For development/testing
-./aica_agent --no-root
+./cda_agent --no-root
 ```
 
 ## 📖 Usage
@@ -107,21 +107,21 @@ sudo ./aica_agent
 
 ```bash
 # Start monitoring
-aica_agent --start
+cda_agent --start
 
 # Check for updates
-aica_agent --check-updates
+cda_agent --check-updates
 
 # View status
-aica_agent --status
+cda_agent --status
 
 # Stop agent
-aica_agent --stop
+cda_agent --stop
 ```
 
 ### Configuration
 
-Create a configuration file `aica_config.txt`:
+Create a configuration file `cda_config.txt`:
 
 ```ini
 [general]
@@ -225,10 +225,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Documentation**: [docs.aica-agent.com](https://docs.aica-agent.com)
-- **Issues**: [GitHub Issues](https://github.com/your-repo/aica-agent/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-repo/aica-agent/discussions)
-- **Email**: support@aica-agent.com
+- **Documentation**: [docs.cda-agent.com](https://docs.cda-agent.com)
+- **Issues**: [GitHub Issues](https://github.com/your-repo/cda-agent/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-repo/cda-agent/discussions)
+- **Email**: support@cda-agent.com
 
 ## 🏆 Awards & Recognition
 

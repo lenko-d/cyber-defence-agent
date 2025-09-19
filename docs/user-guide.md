@@ -23,8 +23,8 @@ sudo apt install libpcap-dev libcurl4-openssl-dev libarchive-dev
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-repo/aica-agent.git
-cd aica-agent
+git clone https://github.com/your-repo/cda-agent.git
+cd cda-agent
 
 # Create build directory
 mkdir build && cd build
@@ -54,7 +54,7 @@ python llm_backend.py --setup
 
 ### Basic Configuration
 
-Create `aica_config.txt` in the working directory:
+Create `cda_config.txt` in the working directory:
 
 ```ini
 [general]
@@ -100,13 +100,13 @@ Common interfaces:
 
 ```bash
 # Start with default configuration
-sudo ./aica_agent
+sudo ./cda_agent
 
 # Start with custom config
-sudo ./aica_agent --config /path/to/config.txt
+sudo ./cda_agent --config /path/to/config.txt
 
 # Run in test mode (no root required)
-./aica_agent --no-root --test
+./cda_agent --no-root --test
 ```
 
 ### Command Line Options
@@ -173,9 +173,9 @@ curl http://localhost:8080/logs
 ### Log Files
 
 CDA logs are stored in:
-- `/var/log/aica/agent.log` - Main agent logs
-- `/var/log/aica/packet_inspector.log` - Packet inspection logs
-- `/var/log/aica/updates.log` - Update operation logs
+- `/var/log/cda/agent.log` - Main agent logs
+- `/var/log/cda/packet_inspector.log` - Packet inspection logs
+- `/var/log/cda/updates.log` - Update operation logs
 
 ## Threat Response
 

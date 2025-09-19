@@ -227,30 +227,30 @@ CDA delivers impressive performance across all key metrics:
 
 ```bash
 # Deploy CDA on enterprise network
-sudo ./aica_agent --interface=eth0 --mode=enterprise
+sudo ./cda_agent --interface=eth0 --mode=enterprise
 
 # Monitor critical infrastructure
-aica_agent --protect-services=web,db,email
+cda_agent --protect-services=web,db,email
 ```
 
 ### IoT Device Security
 
 ```bash
 # Secure IoT network
-./aica_agent --iot-mode --devices=1000
+./cda_agent --iot-mode --devices=1000
 
 # Automated firmware updates
-aica_agent --firmware-update --rollback-enabled
+cda_agent --firmware-update --rollback-enabled
 ```
 
 ### Cloud Security
 
 ```bash
 # Protect cloud workloads
-aica_agent --cloud-provider=aws --auto-scaling
+cda_agent --cloud-provider=aws --auto-scaling
 
 # Container security
-aica_agent --kubernetes --pod-security
+cda_agent --kubernetes --pod-security
 ```
 
 ## Future Developments
@@ -282,6 +282,6 @@ The cybersecurity landscape is changing, and tools like CDA are leading the char
 
 ---
 
-*Ready to enhance your cybersecurity posture? Check out CDA on [GitHub](https://github.com/your-repo/aica-agent) and join the revolution in autonomous cyber defense.*
+*Ready to enhance your cybersecurity posture? Check out CDA on [GitHub](https://github.com/your-repo/cda-agent) and join the revolution in autonomous cyber defense.*
 
 **Tags:** cybersecurity, autonomous-security, threat-detection, network-security, AI, machine-learning, C++, Python

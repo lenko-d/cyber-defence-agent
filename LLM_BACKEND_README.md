@@ -31,7 +31,7 @@ chmod +x llm_backend_install.sh
 
 ## Configuration
 
-After installation, configure the LLM backend by editing `/etc/aica-llm-backend/llm_backend.conf`:
+After installation, configure the LLM backend by editing `/etc/cda-llm-backend/llm_backend.conf`:
 
 ```ini
 [server]
@@ -44,12 +44,12 @@ api_key = your_llm_api_key_here
 
 [logging]
 log_level = INFO
-log_file = /var/log/aica-llm-backend/llm_backend.log
+log_file = /var/log/cda-llm-backend/llm_backend.log
 max_log_size = 100MB
 max_log_files = 5
 
 [knowledge_base]
-knowledge_file = /opt/aica-llm-backend/knowledge_base.json
+knowledge_file = /opt/cda-llm-backend/knowledge_base.json
 auto_save = true
 ```
 
@@ -83,13 +83,13 @@ sudo systemctl status aica-llm-backend
 
 ```bash
 # Start manually
-/opt/aica-llm-backend/start.sh
+/opt/cda-llm-backend/start.sh
 
 # Stop manually
-/opt/aica-llm-backend/stop.sh
+/opt/cda-llm-backend/stop.sh
 
 # Check status
-/opt/aica-llm-backend/status.sh
+/opt/cda-llm-backend/status.sh
 ```
 
 ### API Endpoints
@@ -147,7 +147,7 @@ Content-Type: application/json
 After installation, the following directories and files are created:
 
 ```
-/opt/aica-llm-backend/
+/opt/cda-llm-backend/
 ├── llm_backend.py          # Main backend script
 ├── venv/                   # Python virtual environment
 ├── knowledge_base.json     # Learned threat patterns
@@ -156,10 +156,10 @@ After installation, the following directories and files are created:
 ├── status.sh              # Status check script
 └── uninstall.sh           # Uninstaller script
 
-/etc/aica-llm-backend/
+/etc/cda-llm-backend/
 └── llm_backend.conf       # Configuration file
 
-/var/log/aica-llm-backend/
+/var/log/cda-llm-backend/
 └── llm_backend.log        # Log files
 
 /etc/systemd/system/
@@ -168,10 +168,10 @@ After installation, the following directories and files are created:
 
 ## Logging
 
-The backend logs all activities to `/var/log/aica-llm-backend/llm_backend.log`. Monitor logs with:
+The backend logs all activities to `/var/log/cda-llm-backend/llm_backend.log`. Monitor logs with:
 
 ```bash
-tail -f /var/log/aica-llm-backend/llm_backend.log
+tail -f /var/log/cda-llm-backend/llm_backend.log
 ```
 
 ## Troubleshooting
@@ -185,7 +185,7 @@ tail -f /var/log/aica-llm-backend/llm_backend.log
 
 2. **Service Won't Start**
    - Check system logs: `journalctl -u aica-llm-backend`
-   - Verify Python dependencies: `source /opt/aica-llm-backend/venv/bin/activate && python -c "import requests"`
+   - Verify Python dependencies: `source /opt/cda-llm-backend/venv/bin/activate && python -c "import requests"`
 
 3. **Permission Errors**
    - Ensure the user has sudo privileges for installation
@@ -195,10 +195,10 @@ tail -f /var/log/aica-llm-backend/llm_backend.log
 
 ```bash
 # View recent errors
-grep "ERROR" /var/log/aica-llm-backend/llm_backend.log
+grep "ERROR" /var/log/cda-llm-backend/llm_backend.log
 
 # Monitor API requests
-grep "POST" /var/log/aica-llm-backend/llm_backend.log
+grep "POST" /var/log/cda-llm-backend/llm_backend.log
 ```
 
 ## Integration with CDA Agent
@@ -210,7 +210,7 @@ The LLM backend is designed to work with the main CDA agent. Configure the agent
 To completely remove the LLM backend:
 
 ```bash
-sudo /opt/aica-llm-backend/uninstall.sh
+sudo /opt/cda-llm-backend/uninstall.sh
 ```
 
 This will:
@@ -230,8 +230,8 @@ This will:
 ## Support
 
 For issues or questions:
-1. Check the logs in `/var/log/aica-llm-backend/`
-2. Verify configuration in `/etc/aica-llm-backend/llm_backend.conf`
+1. Check the logs in `/var/log/cda-llm-backend/`
+2. Verify configuration in `/etc/cda-llm-backend/llm_backend.conf`
 3. Ensure the LLM API service is accessible
 4. Review the troubleshooting section above
 

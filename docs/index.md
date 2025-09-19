@@ -26,9 +26,9 @@ Welcome to the official documentation for **CDA (Cyber Defense Agent)**, a next-
 
 ## Support
 
-- [GitHub Issues](https://github.com/your-repo/aica-agent/issues)
-- [Discussions](https://github.com/your-repo/aica-agent/discussions)
-- Email: support@aica-agent.com
+- [GitHub Issues](https://github.com/your-repo/cda-agent/issues)
+- [Discussions](https://github.com/your-repo/cda-agent/discussions)
+- Email: support@cda-agent.com
 
 ---
 

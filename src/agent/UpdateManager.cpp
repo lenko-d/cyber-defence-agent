@@ -282,7 +282,7 @@ VersionInfo UpdateManager::fetchLatestVersion() {
     version.version = "1.1.0"; // Mock data
     version.release_date = getCurrentTimeString();
     version.changelog = "Bug fixes and security improvements";
-    version.download_url = update_server_ + "/downloads/aica-agent-1.1.0.tar.gz";
+    version.download_url = update_server_ + "/downloads/cda-agent-1.1.0.tar.gz";
     version.checksum = "mock_checksum";
     version.critical = false;
 

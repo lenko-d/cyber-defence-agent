@@ -17,8 +17,8 @@ This guide is for developers who want to contribute to CDA or extend its functio
 
 ```bash
 # Clone with submodules if any
-git clone --recursive https://github.com/your-repo/aica-agent.git
-cd aica-agent
+git clone --recursive https://github.com/your-repo/cda-agent.git
+cd cda-agent
 
 # Create build directory
 mkdir build && cd build
@@ -49,7 +49,7 @@ pip install pytest black mypy
 ## Project Structure
 
 ```
-aica-agent/
+cda-agent/
 ├── src/
 │   ├── agent/           # Core agent components
 │   │   ├── Agent.cpp    # Main agent implementation
@@ -211,14 +211,14 @@ std::unique_ptr<Plugin> loadPlugin(const std::string& path);
 
 ```bash
 # Use perf for CPU profiling
-perf record ./aica_agent
+perf record ./cda_agent
 perf report
 
 # Memory profiling with Valgrind
-valgrind --tool=massif ./aica_agent
+valgrind --tool=massif ./cda_agent
 
 # Heap profiling
-valgrind --tool=memcheck --leak-check=full ./aica_agent
+valgrind --tool=memcheck --leak-check=full ./cda_agent
 ```
 
 ### Optimization Techniques
@@ -258,7 +258,7 @@ cmake -DCMAKE_BUILD_TYPE=Debug ..
 make
 
 # Run with debugger
-gdb ./aica_agent
+gdb ./cda_agent
 ```
 
 ### Logging
@@ -291,10 +291,10 @@ RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
-COPY build/aica_agent /usr/local/bin/
-COPY config/aica_config.txt /etc/aica/
+COPY build/cda_agent /usr/local/bin/
+COPY config/cda_config.txt /etc/cda/
 
-CMD ["aica_agent", "--config", "/etc/aica/aica_config.txt"]
+CMD ["cda_agent", "--config", "/etc/cda/cda_config.txt"]
 ```
 
 ### CI/CD Pipeline
