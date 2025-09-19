@@ -18,12 +18,6 @@
 ### 🎯 Mission
 To create cybersecurity that protects systems 24/7 without human intervention, adapting to evolving threats through continuous learning and decision-making.
 
-### 🌟 Key Highlights
-- **🏆 Black Hat Arsenal 2024 Featured Project**
-- **🥇 Cybersecurity Innovation Award 2024 Winner**
-- **⭐ 99.7% Threat Detection Accuracy**
-- **⚡ 15,000+ Packets/Second Processing**
-- **🔒 Military-Grade Security Standards**
 
 ## ✨ Key Features
 

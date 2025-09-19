@@ -30,6 +30,7 @@ link_directories(
 add_executable(test_agent test_agent.cpp ../src/agent/Agent.cpp ../src/agent/Monitor.cpp ../src/agent/Detector.cpp ../src/agent/PacketInspector.cpp ../src/agent/UpdateManager.cpp)
 add_executable(test_packet_inspector test_packet_inspector.cpp ../src/agent/PacketInspector.cpp)
 add_executable(test_detector test_detector.cpp ../src/agent/Detector.cpp ../src/agent/UpdateManager.cpp)
+add_executable(test_update_manager test_update_manager.cpp ../src/agent/UpdateManager.cpp)
 
 # Link libraries
 target_link_libraries(test_agent
@@ -48,6 +49,12 @@ target_link_libraries(test_detector
     GTest::gtest GTest::gtest_main
     ${CMAKE_THREAD_LIBS_INIT}
     crypto curl archive
+target_link_libraries(test_update_manager
+    GTest::gtest GTest::gtest_main
+    ${CMAKE_THREAD_LIBS_INIT}
+    crypto curl archive
+)
+add_test(NAME UpdateManagerTests COMMAND test_update_manager)
 )
 
 # Add tests to CTest
@@ -63,6 +70,10 @@ set_tests_properties(AgentTests PROPERTIES
 
 set_tests_properties(PacketInspectorTests PROPERTIES
     TIMEOUT 60
+set_tests_properties(UpdateManagerTests PROPERTIES
+    TIMEOUT 60
+    LABELS "unit;update"
+)
     LABELS "unit;network"
 )
 
@@ -74,7 +85,7 @@ set_tests_properties(DetectorTests PROPERTIES
 # Custom target to run all tests
 add_custom_target(run_tests
     COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-    DEPENDS test_agent test_packet_inspector test_detector
+    DEPENDS test_agent test_packet_inspector test_detector test_update_manager
     COMMENT "Running all CDA tests"
 )
 
@@ -90,7 +101,7 @@ if(GCOV_PATH)
 endif()
 
 # Installation rules for tests
-install(TARGETS test_agent test_packet_inspector test_detector
+install(TARGETS test_agent test_packet_inspector test_detector test_update_manager
     RUNTIME DESTINATION tests
 )
 
@@ -112,12 +123,14 @@ add_custom_command(
 )
 
 # Compiler warnings and flags
+target_compile_options(test_update_manager PRIVATE -Wall -Wextra -Wpedantic)
 if(MSVC)
     # MSVC specific flags
     target_compile_options(test_agent PRIVATE /W4 /WX)
     target_compile_options(test_packet_inspector PRIVATE /W4 /WX)
     target_compile_options(test_detector PRIVATE /W4 /WX)
 else()
+target_compile_definitions(test_update_manager PRIVATE DEBUG_BUILD)
     # GCC/Clang flags
     target_compile_options(test_agent PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(test_packet_inspector PRIVATE -Wall -Wextra -Wpedantic)
@@ -170,7 +183,7 @@ if(VALGRIND_PATH)
         COMMAND ${VALGRIND_PATH} --tool=memcheck --leak-check=full --show-leak-kinds=all
                 --track-origins=yes --verbose --log-file=valgrind-detector.log
                 $<TARGET_FILE:test_detector>
-        DEPENDS test_agent test_packet_inspector test_detector
+        DEPENDS test_agent test_packet_inspector test_detector test_update_manager
         COMMENT "Running memory checks with Valgrind"
     )
 endif()
@@ -199,10 +212,12 @@ endif()
 # configure_file(
 #     ${CMAKE_CURRENT_SOURCE_DIR}/test_config.ini.in
 #     ${CMAKE_CURRENT_BINARY_DIR}/test_config.ini
+set_tests_properties(UpdateManagerTests PROPERTIES ENVIRONMENT "${TEST_ENVIRONMENT}")
 #     @ONLY
 # )
 
 # Environment setup for tests
+set_property(TEST UpdateManagerTests PROPERTY LABELS "update;unit")
 set(TEST_ENVIRONMENT
     "GTEST_OUTPUT=xml:test_results.xml"
     "ASAN_OPTIONS=detect_leaks=1"
@@ -213,6 +228,7 @@ set_tests_properties(AgentTests PROPERTIES ENVIRONMENT "${TEST_ENVIRONMENT}")
 set_tests_properties(PacketInspectorTests PROPERTIES ENVIRONMENT "${TEST_ENVIRONMENT}")
 set_tests_properties(DetectorTests PROPERTIES ENVIRONMENT "${TEST_ENVIRONMENT}")
 
+set_tests_properties(UpdateManagerTests PROPERTIES FIXTURES_REQUIRED TestEnvironment)
 # Test labels for selective running
 set_property(TEST AgentTests PROPERTY LABELS "core;unit")
 set_property(TEST PacketInspectorTests PROPERTY LABELS "network;unit;integration")
