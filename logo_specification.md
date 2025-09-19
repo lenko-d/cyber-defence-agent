@@ -3,7 +3,7 @@
 ## 🎨 Logo Concept: Shield + AI Brain Motif
 
 ### Overview
-The CDA logo combines a **cybersecurity shield** with an **AI brain motif** to represent autonomous intelligent cyber defense. The design symbolizes protection through artificial intelligence, creating a modern, professional, and trustworthy brand identity.
+The CDA logo combines a **cybersecurity shield** with an **AI brain motif** to represent cyber defense. The design symbolizes protection through artificial intelligence, creating a modern, professional, and trustworthy brand identity.
 
 ---
 

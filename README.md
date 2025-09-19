@@ -13,10 +13,10 @@
 
 ## 🚀 Overview
 
-**CDA (Autonomous Intelligent Cyber Defense Agent)** is a next-generation cybersecurity system that revolutionizes threat detection and response through autonomous AI-powered operations. Built with modern C++17 and Python, CDA provides enterprise-grade security with real-time threat detection, intelligent response mechanisms, and self-updating capabilities.
+**CDA (Cyber Defense Agent)** is a next-generation cybersecurity system that revolutionizes threat detection and response through AI-powered operations. Built with modern C++17 and Python, CDA provides enterprise-grade security with real-time threat detection, response mechanisms, and self-updating capabilities.
 
 ### 🎯 Mission
-To create autonomous cybersecurity that protects systems 24/7 without human intervention, adapting to evolving threats through continuous learning and intelligent decision-making.
+To create cybersecurity that protects systems 24/7 without human intervention, adapting to evolving threats through continuous learning and decision-making.
 
 ### 🌟 Key Highlights
 - **🏆 Black Hat Arsenal 2024 Featured Project**
@@ -238,4 +238,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**CDA**: Protecting systems with autonomous intelligence. 🔒🤖
+**CDA**: Protecting systems with AI-powered security. 🔒🤖

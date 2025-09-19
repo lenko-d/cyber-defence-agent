@@ -1,6 +1,6 @@
 # CDA Documentation
 
-Welcome to the official documentation for **CDA (Autonomous Intelligent Cyber Defense Agent)**, a next-generation cybersecurity system that provides autonomous threat detection and response.
+Welcome to the official documentation for **CDA (Cyber Defense Agent)**, a next-generation cybersecurity system that provides threat detection and response.
 
 ## Table of Contents
 
@@ -32,4 +32,4 @@ Welcome to the official documentation for **CDA (Autonomous Intelligent Cyber De
 
 ---
 
-**CDA**: Protecting systems with autonomous intelligence. 🔒🤖
+**CDA**: Protecting systems with AI-powered security. 🔒🤖
