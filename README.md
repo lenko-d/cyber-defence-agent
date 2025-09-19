@@ -217,18 +217,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Leverages OpenSSL for cryptography
 - Inspired by advanced cybersecurity research
 
-## 📞 Support
 
-- **Documentation**: [docs.cda-agent.com](https://docs.cda-agent.com)
-- **Issues**: [GitHub Issues](https://github.com/your-repo/cda-agent/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-repo/cda-agent/discussions)
-- **Email**: support@cda-agent.com
-
-## 🏆 Awards & Recognition
-
-- 🥇 **Cybersecurity Innovation Award 2024**
-- 🥈 **Best Open Source Security Project**
-- ⭐ **Featured in Black Hat Arsenal 2024**
 
 ---
 
