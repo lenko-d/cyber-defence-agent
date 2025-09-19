@@ -251,6 +251,41 @@ Format as JSON array of prediction objects
         except FileNotFoundError:
             self.logger.info("Knowledge base file not found, starting with empty base")
 
+# Standalone function for testing
+def analyze_threats_with_llm(observations: List[str]) -> Optional[Dict[str, Any]]:
+    """
+    Analyze threats using LLM backend
+    Returns threat analysis or None on error
+    """
+    try:
+        backend = LLMBackend()
+        result = backend.analyze_threat(observations)
+        # If the result indicates an error (unknown threat level), return None
+        if result.get("threat_level") == "unknown" and result.get("confidence") == 0.0:
+            return None
+        return result
+    except Exception as e:
+        print(f"Error in LLM analysis: {e}")
+        return None
+
+
+# Standalone function for testing
+def analyze_threats_with_llm(observations: List[str]) -> Optional[Dict[str, Any]]:
+    """
+    Analyze threats using LLM backend
+    Returns threat analysis or None on error
+    """
+    try:
+        backend = LLMBackend()
+        result = backend.analyze_threat(observations)
+        # If the result indicates an error (unknown threat level), return None
+        if result.get("threat_level") == "unknown" and result.get("confidence") == 0.0:
+            return None
+        return result
+    except Exception as e:
+        print(f"Error in LLM analysis: {e}")
+        return None
+
 
 class BackendServer:
     """HTTP server for the backend"""

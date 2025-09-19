@@ -2,6 +2,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <thread>
 
 // Mock detector for testing (since we don't have the full implementation)
 class MockDetector {

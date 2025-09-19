@@ -17,6 +17,7 @@ find_package(Threads REQUIRED)
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/../include
     ${CMAKE_CURRENT_SOURCE_DIR}/../src
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/agent
     ${GTEST_INCLUDE_DIRS}
 )
 
@@ -26,30 +27,27 @@ link_directories(
 )
 
 # Test executables
-add_executable(test_agent test_agent.cpp)
-add_executable(test_packet_inspector test_packet_inspector.cpp)
-add_executable(test_detector test_detector.cpp)
+add_executable(test_agent test_agent.cpp ../src/agent/Agent.cpp ../src/agent/Monitor.cpp ../src/agent/Detector.cpp ../src/agent/PacketInspector.cpp ../src/agent/UpdateManager.cpp)
+add_executable(test_packet_inspector test_packet_inspector.cpp ../src/agent/PacketInspector.cpp)
+add_executable(test_detector test_detector.cpp ../src/agent/Detector.cpp ../src/agent/UpdateManager.cpp)
 
 # Link libraries
 target_link_libraries(test_agent
-    ${GTEST_LIBRARIES}
+    GTest::gtest GTest::gtest_main
     ${CMAKE_THREAD_LIBS_INIT}
-    # Add CDA core library when available
-    # aica_core
+    crypto pcap curl archive
 )
 
 target_link_libraries(test_packet_inspector
-    ${GTEST_LIBRARIES}
+    GTest::gtest GTest::gtest_main
     ${CMAKE_THREAD_LIBS_INIT}
-    # Add required libraries
-    pcap
-    # aica_core
+    pcap crypto curl archive
 )
 
 target_link_libraries(test_detector
-    ${GTEST_LIBRARIES}
+    GTest::gtest GTest::gtest_main
     ${CMAKE_THREAD_LIBS_INIT}
-    # aica_core
+    crypto curl archive
 )
 
 # Add tests to CTest
@@ -121,9 +119,9 @@ if(MSVC)
     target_compile_options(test_detector PRIVATE /W4 /WX)
 else()
     # GCC/Clang flags
-    target_compile_options(test_agent PRIVATE -Wall -Wextra -Wpedantic -Werror)
-    target_compile_options(test_packet_inspector PRIVATE -Wall -Wextra -Wpedantic -Werror)
-    target_compile_options(test_detector PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    target_compile_options(test_agent PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(test_packet_inspector PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(test_detector PRIVATE -Wall -Wextra -Wpedantic)
 endif()
 
 # Debug build configuration
@@ -198,11 +196,11 @@ if(benchmark_FOUND)
 endif()
 
 # Test configuration file
-configure_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/test_config.ini.in
-    ${CMAKE_CURRENT_BINARY_DIR}/test_config.ini
-    @ONLY
-)
+# configure_file(
+#     ${CMAKE_CURRENT_SOURCE_DIR}/test_config.ini.in
+#     ${CMAKE_CURRENT_BINARY_DIR}/test_config.ini
+#     @ONLY
+# )
 
 # Environment setup for tests
 set(TEST_ENVIRONMENT

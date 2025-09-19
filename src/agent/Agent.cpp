@@ -16,7 +16,7 @@
 
 namespace CDA {
 
-Agent::Agent() : running_(false), httpServerThread_(nullptr), serverSocket_(-1), threats_detected_(0) {
+Agent::Agent() : running_(false), threats_detected_(0), httpServerThread_(nullptr), serverSocket_(-1) {
     // Initialize components
     monitor_ = createMonitor();
     detector_ = createDetector();

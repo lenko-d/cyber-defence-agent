@@ -19,7 +19,7 @@ file(GLOB_RECURSE CONTROL_SOURCES "src/control_center/*.cpp")
 add_executable(cda_agent ${AGENT_SOURCES} ${BACKEND_SOURCES} ${CONTROL_SOURCES})
 
 # Link libraries
-target_link_libraries(aica_agent Threads::Threads crypto pcap curl archive)
+target_link_libraries(cda_agent Threads::Threads crypto pcap curl archive)
 
 # Installation targets
 install(TARGETS cda_agent
