@@ -1,0 +1,7 @@
+build/
+*.log
+*.tmp
+__pycache__/
+*.pyc
+.vscode/
+.DS_Store
