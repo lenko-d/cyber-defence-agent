@@ -15,7 +15,7 @@ Welcome to the official documentation for **CDA (Cyber Defense Agent)**, a next-
 
 1. [Install CDA](user-guide.md#installation)
 2. [Configure the system](user-guide.md#configuration)
-3. [Start monitoring](user-guide.md#running-aica)
+3. [Start monitoring](user-guide.md#running-cda)
 
 ## Key Features
 

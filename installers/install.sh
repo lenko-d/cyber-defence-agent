@@ -172,7 +172,7 @@ max_log_files = 5
 # Update configuration
 auto_update = true
 update_check_interval = 3600
-update_server = https://updates.aica.example.com
+update_server = https://updates.cda.example.com
 
 [security]
 # Security settings
@@ -240,8 +240,8 @@ create_scripts() {
 echo "Starting CDA Agent..."
 cd /opt/cda
 ./bin/cda_agent &
-echo $! > aica.pid
-echo "CDA Agent started with PID $(cat aica.pid)"
+echo $! > cda.pid
+echo "CDA Agent started with PID $(cat cda.pid)"
 EOF
 
     # Create stop script
@@ -249,11 +249,11 @@ EOF
 #!/bin/bash
 # CDA Stop Script
 
-if [[ -f "/opt/cda/aica.pid" ]]; then
-    PID=$(cat /opt/cda/aica.pid)
+if [[ -f "/opt/cda/cda.pid" ]]; then
+    PID=$(cat /opt/cda/cda.pid)
     echo "Stopping CDA Agent (PID: $PID)..."
     kill $PID
-    rm -f /opt/cda/aica.pid
+    rm -f /opt/cda/cda.pid
     echo "CDA Agent stopped"
 else
     echo "CDA Agent does not appear to be running"
@@ -265,15 +265,15 @@ EOF
 #!/bin/bash
 # CDA Status Script
 
-if [[ -f "/opt/cda/aica.pid" ]]; then
-    PID=$(cat /opt/cda/aica.pid)
+if [[ -f "/opt/cda/cda.pid" ]]; then
+    PID=$(cat /opt/cda/cda.pid)
     if ps -p $PID > /dev/null; then
         echo "CDA Agent is running (PID: $PID)"
         echo "Memory usage:"
         ps -p $PID -o pid,ppid,cmd,%mem,%cpu --no-headers
     else
         echo "CDA Agent is not running (stale PID file)"
-        rm -f /opt/cda/aica.pid
+        rm -f /opt/cda/cda.pid
     fi
 else
     echo "CDA Agent is not running"
@@ -297,7 +297,7 @@ EOF
 setup_logrotate() {
     print_status "Setting up log rotation..."
 
-    sudo tee "/etc/logrotate.d/aica" > /dev/null << EOF
+    sudo tee "/etc/logrotate.d/cda" > /dev/null << EOF
 /var/log/cda/*.log {
     daily
     missingok
@@ -336,7 +336,7 @@ sudo rm -rf /opt/cda
 sudo rm -rf /etc/cda
 sudo rm -rf /var/log/cda
 sudo rm -rf /var/lib/cda
-sudo rm -f /etc/logrotate.d/aica
+sudo rm -f /etc/logrotate.d/cda
 
 echo "CDA has been uninstalled successfully"
 EOF

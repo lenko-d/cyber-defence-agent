@@ -116,8 +116,8 @@ sudo systemctl enable cda-agent
 
 #### Control Center (if installed):
 ```bash
-sudo systemctl start aica-control-center
-sudo systemctl enable aica-control-center
+sudo systemctl start cda-control-center
+sudo systemctl enable cda-control-center
 ```
 
 #### Manual start:
@@ -136,7 +136,7 @@ cd /opt/cda-control-center
 Check service status:
 ```bash
 sudo systemctl status cda-agent
-sudo systemctl status aica-control-center  # If installed
+sudo systemctl status cda-control-center  # If installed
 ```
 
 Or check manually:

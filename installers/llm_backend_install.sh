@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 INSTALL_DIR="/opt/cda-llm-backend"
 CONFIG_DIR="/etc/cda-llm-backend"
 LOG_DIR="/var/log/cda-llm-backend"
-SERVICE_NAME="aica-llm-backend"
+SERVICE_NAME="cda-llm-backend"
 PYTHON_VERSION="python3"
 
 # Function to print colored output
@@ -196,7 +196,7 @@ Restart=always
 RestartSec=5
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=aica-llm-backend
+SyslogIdentifier=cda-llm-backend
 
 # Environment
 Environment=PATH=$INSTALL_DIR/venv/bin
@@ -320,11 +320,11 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 print_status "Stopping CDA LLM Backend service..."
-sudo systemctl stop aica-llm-backend 2>/dev/null || print_warning "Service was not running"
-sudo systemctl disable aica-llm-backend 2>/dev/null || print_warning "Service was not enabled"
+sudo systemctl stop cda-llm-backend 2>/dev/null || print_warning "Service was not running"
+sudo systemctl disable cda-llm-backend 2>/dev/null || print_warning "Service was not enabled"
 
 print_status "Removing systemd service..."
-sudo rm -f /etc/systemd/system/aica-llm-backend.service
+sudo rm -f /etc/systemd/system/cda-llm-backend.service
 sudo systemctl daemon-reload
 
 print_status "Removing files and directories..."
@@ -339,7 +339,7 @@ if pgrep -f "llm_backend.py" > /dev/null; then
 fi
 
 print_status "Cleaning up user crontab entries..."
-crontab -l 2>/dev/null | grep -v "aica-llm-backend" | crontab - 2>/dev/null || true
+crontab -l 2>/dev/null | grep -v "cda-llm-backend" | crontab - 2>/dev/null || true
 
 print_success "CDA LLM Backend has been completely removed!"
 echo ""
@@ -369,10 +369,10 @@ post_install_info() {
     echo ""
     echo "Service Management:"
     echo "=================="
-    echo "Start service:   sudo systemctl start aica-llm-backend"
-    echo "Stop service:    sudo systemctl stop aica-llm-backend"
-    echo "Enable service:  sudo systemctl enable aica-llm-backend"
-    echo "Check status:    sudo systemctl status aica-llm-backend"
+    echo "Start service:   sudo systemctl start cda-llm-backend"
+    echo "Stop service:    sudo systemctl stop cda-llm-backend"
+    echo "Enable service:  sudo systemctl enable cda-llm-backend"
+    echo "Check status:    sudo systemctl status cda-llm-backend"
     echo ""
     echo "Manual Control:"
     echo "=============="
@@ -397,7 +397,7 @@ post_install_info() {
     echo "Next Steps:"
     echo "==========="
     echo "1. Configure your LLM API endpoint in $CONFIG_DIR/llm_backend.conf"
-    echo "2. Start the service: sudo systemctl start aica-llm-backend"
+    echo "2. Start the service: sudo systemctl start cda-llm-backend"
     echo "3. Check logs: tail -f $LOG_DIR/llm_backend.log"
 }
 

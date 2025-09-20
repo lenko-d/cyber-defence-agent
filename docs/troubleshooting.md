@@ -20,7 +20,7 @@ ip link show
 df -h
 
 # Check system logs
-journalctl -u aica -f
+journalctl -u cda -f
 ```
 
 ### Log Analysis
@@ -140,7 +140,7 @@ sed -i 's/packet_buffer_size=.*/packet_buffer_size=32768/' cda_config.txt
 sed -i 's/monitoring_interval=.*/monitoring_interval=5000/' cda_config.txt
 
 # Restart agent
-sudo systemctl restart aica
+sudo systemctl restart cda
 ```
 
 #### Memory Leaks
@@ -249,10 +249,10 @@ chmod 644 cda_config.txt
 grep -n "=" cda_config.txt
 
 # Compare with example config
-diff cda_config.txt config/aica_config.example.txt
+diff cda_config.txt config/cda_config.example.txt
 
 # Reset to defaults
-cp config/aica_config.default.txt cda_config.txt
+cp config/cda_config.default.txt cda_config.txt
 ```
 
 ### Update Issues
@@ -343,7 +343,7 @@ EXPLAIN QUERY PLAN SELECT * FROM threats;
 CREATE INDEX idx_threats_timestamp ON threats(timestamp);
 
 # Vacuum database
-sqlite3 /var/lib/cda/database/aica.db "VACUUM;"
+sqlite3 /var/lib/cda/database/cda.db "VACUUM;"
 ```
 
 ### Security Issues
@@ -429,16 +429,16 @@ Check integration with system components:
 
 ```bash
 # Verify systemd integration
-systemctl status aica
+systemctl status cda
 
 # Check log rotation
-logrotate -f /etc/logrotate.d/aica
+logrotate -f /etc/logrotate.d/cda
 
 # Verify cron jobs
-crontab -l | grep aica
+crontab -l | grep cda
 
 # Check SELinux/AppArmor
-sudo aa-status | grep aica
+sudo aa-status | grep cda
 ```
 
 
@@ -461,14 +461,14 @@ cat cda_config.txt | grep -v password
 tail -100 /var/log/cda/agent.log
 
 # Process information
-ps aux | grep aica
+ps aux | grep cda
 ```
 
 ### Emergency Procedures
 
 For critical issues:
 
-1. **Stop the agent**: `sudo systemctl stop aica`
+1. **Stop the agent**: `sudo systemctl stop cda`
 2. **Isolate the system**: Disconnect from network if compromised
 3. **Collect evidence**: Preserve logs and system state
 4. **Contact support**: Provide diagnostic information

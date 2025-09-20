@@ -124,14 +124,14 @@ To run CDA as a system service:
 
 ```bash
 # Create service file
-sudo cp aica.service /etc/systemd/system/
+sudo cp cda.service /etc/systemd/system/
 
 # Enable and start service
-sudo systemctl enable aica
-sudo systemctl start aica
+sudo systemctl enable cda
+sudo systemctl start cda
 
 # Check status
-sudo systemctl status aica
+sudo systemctl status cda
 ```
 
 ## Monitoring and Control

@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 INSTALL_DIR="/opt/cda-control-center"
 CONFIG_DIR="/etc/cda-control-center"
 LOG_DIR="/var/log/cda-control-center"
-SERVICE_NAME="aica-control-center"
+SERVICE_NAME="cda-control-center"
 PYTHON_VERSION="python3"
 
 # Function to print colored output
@@ -368,7 +368,7 @@ Restart=always
 RestartSec=5
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=aica-control-center
+SyslogIdentifier=cda-control-center
 
 # Environment
 Environment=PATH=$INSTALL_DIR/venv/bin
@@ -492,11 +492,11 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 print_status "Stopping CDA Control Center service..."
-sudo systemctl stop aica-control-center 2>/dev/null || print_warning "Service was not running"
-sudo systemctl disable aica-control-center 2>/dev/null || print_warning "Service was not enabled"
+sudo systemctl stop cda-control-center 2>/dev/null || print_warning "Service was not running"
+sudo systemctl disable cda-control-center 2>/dev/null || print_warning "Service was not enabled"
 
 print_status "Removing systemd service..."
-sudo rm -f /etc/systemd/system/aica-control-center.service
+sudo rm -f /etc/systemd/system/cda-control-center.service
 sudo systemctl daemon-reload
 
 print_status "Removing files and directories..."
@@ -511,7 +511,7 @@ if pgrep -f "control_server.py" > /dev/null; then
 fi
 
 print_status "Cleaning up user crontab entries..."
-crontab -l 2>/dev/null | grep -v "aica-control-center" | crontab - 2>/dev/null || true
+crontab -l 2>/dev/null | grep -v "cda-control-center" | crontab - 2>/dev/null || true
 
 print_success "CDA Control Center has been completely removed!"
 echo ""
@@ -541,10 +541,10 @@ post_install_info() {
     echo ""
     echo "Service Management:"
     echo "=================="
-    echo "Start service:   sudo systemctl start aica-control-center"
-    echo "Stop service:    sudo systemctl stop aica-control-center"
-    echo "Enable service:  sudo systemctl enable aica-control-center"
-    echo "Check status:    sudo systemctl status aica-control-center"
+    echo "Start service:   sudo systemctl start cda-control-center"
+    echo "Stop service:    sudo systemctl stop cda-control-center"
+    echo "Enable service:  sudo systemctl enable cda-control-center"
+    echo "Check status:    sudo systemctl status cda-control-center"
     echo ""
     echo "Manual Control:"
     echo "=============="

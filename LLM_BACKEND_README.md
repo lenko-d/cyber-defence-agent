@@ -67,16 +67,16 @@ The backend supports various LLM APIs. Configure the `api_url` and `api_key` in 
 
 ```bash
 # Start the service
-sudo systemctl start aica-llm-backend
+sudo systemctl start cda-llm-backend
 
 # Stop the service
-sudo systemctl stop aica-llm-backend
+sudo systemctl stop cda-llm-backend
 
 # Enable auto-start on boot
-sudo systemctl enable aica-llm-backend
+sudo systemctl enable cda-llm-backend
 
 # Check service status
-sudo systemctl status aica-llm-backend
+sudo systemctl status cda-llm-backend
 ```
 
 ### Manual Control
@@ -163,7 +163,7 @@ After installation, the following directories and files are created:
 └── llm_backend.log        # Log files
 
 /etc/systemd/system/
-└── aica-llm-backend.service # Systemd service file
+└── cda-llm-backend.service # Systemd service file
 ```
 
 ## Logging
@@ -184,7 +184,7 @@ tail -f /var/log/cda-llm-backend/llm_backend.log
    - Ensure the LLM service is running and accessible
 
 2. **Service Won't Start**
-   - Check system logs: `journalctl -u aica-llm-backend`
+   - Check system logs: `journalctl -u cda-llm-backend`
    - Verify Python dependencies: `source /opt/cda-llm-backend/venv/bin/activate && python -c "import requests"`
 
 3. **Permission Errors**
