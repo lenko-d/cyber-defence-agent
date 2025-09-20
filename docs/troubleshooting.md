@@ -441,14 +441,6 @@ crontab -l | grep aica
 sudo aa-status | grep aica
 ```
 
-## Getting Help
-
-### Support Resources
-
-- **Documentation**: [docs.cda-agent.com](https://docs.cda-agent.com)
-- **GitHub Issues**: [Report bugs](https://github.com/your-repo/cda-agent/issues)
-- **Community Forum**: [Discussions](https://github.com/your-repo/cda-agent/discussions)
-- **Email Support**: support@cda-agent.com
 
 ### Diagnostic Information
 

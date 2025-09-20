@@ -1,16 +1,7 @@
 # Building an Autonomous Cyber Defense Agent: A Deep Dive into CDA
 
-**Published on September 6, 2025** | **Author: Dr. Cybersecurity Research Team**
 
----
 
-<div align="center">
-  <img src="https://img.shields.io/badge/CDA-v1.0.0-blue" alt="CDA v1.0.0"/>
-  <img src="https://img.shields.io/badge/Black_Hat_Arsenal-2024-red" alt="Black Hat Arsenal 2024"/>
-  <img src="https://img.shields.io/badge/Cybersecurity_Innovation_Award-2024-gold" alt="Cybersecurity Innovation Award 2024"/>
-</div>
-
----
 
 ## Introduction
 
