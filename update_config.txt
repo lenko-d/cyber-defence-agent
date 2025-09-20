@@ -1,4 +1,4 @@
 current_version=1.0.0
 update_server=https://updates.cda-agent.com
 update_interval=60
-auto_update=false
+auto_update=true
